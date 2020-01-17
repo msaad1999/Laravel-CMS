@@ -15,12 +15,13 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .styles([
         'resources/theme_sb-admin-2/css/sb-admin-2.min.css',
-        'resources/theme_sb-admin-2/vendor/fontawesome-free/css/all.min.css',
+        'resources/theme_sb-admin-2/vendor/fontawesome/css/all.min.css',
     ], 'public/css/libs.css')
     .scripts([
         'resources/theme_sb-admin-2/vendor/jquery/jquery.min.js',
         'resources/theme_sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js',
         'resources/theme_sb-admin-2/vendor/jquery-easing/jquery.easing.min.js',
+        'resources/theme_sb-admin-2/vendor/fontawesome/js/all.min.js',
         'resources/theme_sb-admin-2/js/sb-admin-2.min.js',
         'resources/theme_sb-admin-2/vendor/chart.js/Chart.min.js',
         'resources/theme_sb-admin-2/js/demo/chart-area-demo.js',
