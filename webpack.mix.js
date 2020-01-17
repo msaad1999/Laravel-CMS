@@ -14,16 +14,15 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .styles([
-        'resources/css/libs/blog-post.css',
-        'resources/css/libs/bootstrap.css',
-        'resources/css/libs/font-awesome.css',
-        'resources/css/libs/metisMenu.css',
-        'resources/css/libs/sb-admin-2.css',
+        'resources/theme_sb-admin-2/css/sb-admin-2.min.css',
+        'resources/theme_sb-admin-2/vendor/fontawesome-free/css/all.min.css',
     ], 'public/css/libs.css')
     .scripts([
-        'resources/js/libs/jquery.js',
-        'resources/js/libs/bootstrap.min.js',
-        'resources/js/libs/metisMenu.js',
-        'resources/js/libs/sb-admin-2.js',
-        'resources/js/libs/scripts.js',
+        'resources/theme_sb-admin-2/vendor/jquery/jquery.min.js',
+        'resources/theme_sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js',
+        'resources/theme_sb-admin-2/vendor/jquery-easing/jquery.easing.min.js',
+        'resources/theme_sb-admin-2/js/sb-admin-2.min.js',
+        'resources/theme_sb-admin-2/vendor/chart.js/Chart.min.js',
+        'resources/theme_sb-admin-2/js/demo/chart-area-demo.js',
+        'resources/theme_sb-admin-2/js/demo/chart-pie-demo.js',
     ], 'public/js/libs.js');
