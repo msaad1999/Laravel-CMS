@@ -24,6 +24,9 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/theme_sb-admin-2/vendor/fontawesome/js/all.min.js',
         'resources/theme_sb-admin-2/js/sb-admin-2.min.js',
         'resources/theme_sb-admin-2/vendor/chart.js/Chart.min.js',
-        'resources/theme_sb-admin-2/js/demo/chart-area-demo.js',
-        'resources/theme_sb-admin-2/js/demo/chart-pie-demo.js',
-    ], 'public/js/libs.js');
+        // 'resources/theme_sb-admin-2/js/demo/chart-area-demo.js',
+        // 'resources/theme_sb-admin-2/js/demo/chart-pie-demo.js',
+    ], 'public/js/libs.js')
+    // .scripts('resources/theme_sb-admin-2/vendor/chart.js/Chart.min.js', 'public/js/components/chart.min.js')
+    .scripts('resources/theme_sb-admin-2/js/demo/chart-area-demo.js', 'public/js/components/chart-area.js')
+    .scripts('resources/theme_sb-admin-2/js/demo/chart-pie-demo.js', 'public/js/components/chart-pie.js');

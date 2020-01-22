@@ -51,10 +51,10 @@
                         </button>
                         <hr>
                         <a href="#" class="btn btn-google btn-user btn-block">
-                            <i class="fab fa-google fa-fw"></i>{{ __('Login with Google') }}
+                            <i class="fab fa-google fa-fw"></i>{{ __(' Login with Google') }}
                         </a>
                         <a href="#" class="btn btn-facebook btn-user btn-block">
-                            <i class="fab fa-facebook-f fa-fw"></i>{{ __('Login with Facebook') }}
+                            <i class="fab fa-facebook-f fa-fw"></i>{{ __(' Login with Facebook') }}
                         </a>
                     </form>
 
