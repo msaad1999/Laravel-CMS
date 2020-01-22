@@ -25,6 +25,6 @@
   </div>
 </div>
 
-<script src='{{ asset('js/components/chart-area.js') }}'></script>
-
-  
+@push('scripts')
+<script src="{{ asset('js/components/chart-area.js') }}"></script>
+@endpush 

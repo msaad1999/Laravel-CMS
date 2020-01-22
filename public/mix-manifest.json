@@ -4,5 +4,7 @@
     "/css/libs.css": "/css/libs.css",
     "/js/libs.js": "/js/libs.js",
     "/js/components/chart-area.js": "/js/components/chart-area.js",
-    "/js/components/chart-pie.js": "/js/components/chart-pie.js"
+    "/js/components/chart-pie.js": "/js/components/chart-pie.js",
+    "/js/components/chart-bar.js": "/js/components/chart-bar.js",
+    "/js/components/datatables.js": "/js/components/datatables.js"
 }

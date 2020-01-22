@@ -36,4 +36,6 @@
   </div>
 </div>
 
+@push('scripts')
 <script src='{{ asset('js/components/chart-pie.js') }}'></script> 
+@endpush
