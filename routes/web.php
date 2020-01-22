@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 Route::get('/admin', function(){
 
-    return view('admin.index');
+    return view('layouts.admin');
 });
 
 Route::resource('admin/users', 'AdminUsersController');
