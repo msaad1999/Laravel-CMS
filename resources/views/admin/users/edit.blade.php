@@ -79,7 +79,7 @@
             </div>
 
             <div class="form=group">
-                {!! Form::submit('Update User', ['class'=>'btn btn-primary']) !!}
+                {!! Form::submit('Update User', ['class'=>'btn btn-primary px-5']) !!}
             </div>
 
 
@@ -90,7 +90,7 @@
             {!! Form::model($user, ['method'=>'DELETE', 'action'=>['AdminUsersController@destroy', $user->id]]) !!}
 
             <div class="form=group my-2">
-                {!! Form::submit('Delete User', ['class'=>'btn btn-danger']) !!}
+                {!! Form::submit('Delete User', ['class'=>'btn btn-danger px-5']) !!}
             </div>
 
             {!! Form::close() !!}

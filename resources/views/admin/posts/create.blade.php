@@ -22,7 +22,7 @@
 
         <div class="form-group">
             {!! Form::label('category_id', 'Category: ') !!}
-            {!! Form::select('category_id', [''=>'options', '1'=>'dummy option'], null, ['class'=>'form-control']) !!}
+            {!! Form::select('category_id', [''=>'Choose Category'] + $categories, null, ['class'=>'form-control']) !!}
             @error('category_id')
                 <span class="text-danger small">
                     <strong>{{ $message }}</strong>

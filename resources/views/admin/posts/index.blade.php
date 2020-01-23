@@ -19,7 +19,7 @@
         <th>Photo</th>
         <th>Title</th>
         <th>Author</th>
-        {{-- <th>Category</th> --}}
+        <th>Category</th>
         <th>Created At</th>
         <th>Updated At</th>
         </tr>
@@ -32,7 +32,7 @@
                 <td><img src='{{ is_null($post->photo) ? $post->defaultImage : $post->photo->file }}' class="rounded" width=50 height=40></td>
                 <td><a href="{{ route('posts.edit', $post->id) }}">{{ $post->title }}</a></td>
                 <td><a href="{{ route('users.edit', $post->user->id) }}">{{  $post->user->name   }}</a></td>
-                {{-- <td>{{ $posts->category->name }}</td> --}}
+                <td>{{ $post->category ? $post->category->name : 'Uncategorized' }}</td>
                 <td>{{ $post->created_at->diffForHumans() }}</td>
                 <td>{{ $post->updated_at->diffForHumans() }}</td>
             </tr>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Photo;
 use App\User;
 use App\Post;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -37,7 +38,9 @@ class AdminPostsController extends Controller
     {
         //
 
-        return view('admin.posts.create');
+        $categories = Category::pluck('name', 'id')->all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -90,7 +93,10 @@ class AdminPostsController extends Controller
     {
         //
 
-        return view('users.edit');
+        $post = Post::findOrFail($id);
+        $categories = Category::pluck('name', 'id')->all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -103,6 +109,36 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $post = Post::findOrFail($id);
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+
+            $name = time().$file->getClientOriginalName();
+            $file->move('img', $name);
+
+            if($post->photo){
+
+                $photo = Photo::findOrFail($post->photo->id);
+                $photo->update(['file'=>$name]);
+                unlink(public_path() . $post->photo->file);
+            }
+            else {
+
+                $photo = Photo::create(['file'=>$name]);
+            }
+            $input['photo_id'] = $photo->id;
+        }
+
+        Auth::user()->posts()->whereId($id)->first()->update($input);
+
+        Session::flash('status', [
+            'class' => 'success',
+            'message' => 'Post successfully updated',
+        ]);
+
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -114,5 +150,22 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
+
+        $post = Post::findOrFail($id);
+
+        if($post->photo){
+
+            unlink(public_path() . $post->photo->file);
+            Photo::findOrFail($post->photo->id)->delete();
+        }
+
+        $post->delete();
+
+        Session::flash('status', [
+            'class' => 'danger',
+            'message' => 'Post successfully deleted',
+        ]);
+
+        return redirect(route('posts.index'));
     }
 }
