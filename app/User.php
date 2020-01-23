@@ -63,6 +63,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function photo(){
 
-        return $this->belogsTo('App\Photo');
+        return $this->belongsTo('App\Photo');
     }
 }

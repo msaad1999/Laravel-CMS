@@ -8,7 +8,14 @@ class Photo extends Model
 {
     //
 
+    protected $path = '/img/users/';
+
     protected $fillable = ['file'];
+
+    public function getFileAttribute($value){
+
+        return $this->path . $value;
+    }
 
     
 }
