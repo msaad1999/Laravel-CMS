@@ -51,9 +51,9 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('file', 'File: ') !!}
-            {!! Form::file('file', null, ['class'=>'form-control']) !!}
-            @error('file')
+            {!! Form::label('photo_id', 'File: ') !!}
+            {!! Form::file('photo_id', null, ['class'=>'form-control']) !!}
+            @error('photo_id')
                 <span class="text-danger small">
                     <strong>{{ $message }}</strong>
                 </span>
