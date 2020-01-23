@@ -6,52 +6,25 @@
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-          <thead>
+            <thead>
 
-            <tr>
-              <th>ID</th>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Created At</th>
-              <th>Updated At</th>
-            </tr>
+                <tr>
+                    {{ $headings }}
+                </tr>
 
-          </thead>
-          <tfoot>
+            </thead>
+            <tfoot>
 
-            <tr>
-              <th>ID</th>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Created At</th>
-              <th>Updated At</th>
-            </tr>
+                <tr>
+                    {{ $headings }}
+                </tr>
 
-          </tfoot>
-          <tbody>
+            </tfoot>
+            <tbody>
 
-            @if($users)
-            @foreach($users as $user)
-              <tr>
-                <td>{{ $user->id }}</td>
-                <td><img src='{{ is_null($user->photo) ? '/img/users/default.png' : $user->photo->file }}' class="rounded-circle" width=40 height=40></td>
-                <td><a href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->role->name }}</td>
-                <td>{{ $user->is_active ? 'Active' : 'Not Active' }}</td>
-                <td>{{ $user->created_at->diffForHumans() }}</td>
-                <td>{{ $user->updated_at->diffForHumans() }}</td>
-              </tr>
-            @endforeach
-          @endif
+                {{ $body }}
 
-          </tbody>
+            </tbody>
         </table>
       </div>
     </div>
