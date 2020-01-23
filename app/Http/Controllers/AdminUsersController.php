@@ -8,6 +8,8 @@ use App\Role;
 use App\Photo;
 use App\http\Requests\UsersRequest;
 use App\http\Requests\UsersEditRequest;
+use Illuminate\Support\Facades\Session;
+
 
 class AdminUsersController extends Controller
 {
@@ -129,9 +131,20 @@ class AdminUsersController extends Controller
             $photo = Photo::create(['file'=>$name]);
 
             $input['photo_id'] = $photo->id;
+
+            if($user->photo){
+
+                unlink(public_path() . $user->photo->file);
+                Photo::findOrFail($user->photo->id)->delete();
+            }
         }
 
         $user->update($input);
+
+        Session::flash('status', [
+            'class' => 'success',
+            'message' => 'User successfully updated',
+        ]);
 
         return redirect(route('users.index'));
         
@@ -147,7 +160,20 @@ class AdminUsersController extends Controller
     {
         //
 
-        User::findOrFail($id)->delete();
+        $user = User::findOrFail($id);
+
+        if($user->photo){
+
+            unlink(public_path() . $user->photo->file);
+            Photo::findOrFail($user->photo->id)->delete();
+        }
+
+        $user->delete();
+
+        Session::flash('status', [
+            'class' => 'danger',
+            'message' => 'User successfully deleted',
+        ]);
 
         return redirect(route('users.index'));
     }

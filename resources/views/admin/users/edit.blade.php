@@ -81,15 +81,17 @@
                 {!! Form::submit('Update User', ['class'=>'btn btn-primary']) !!}
             </div>
 
+            
+
+    
+            {!! Form::close() !!}
+
             {!! Form::model($user, ['method'=>'DELETE', 'action'=>['AdminUsersController@destroy', $user->id]]) !!}
 
             <div class="form=group my-2">
                 {!! Form::submit('Delete User', ['class'=>'btn btn-danger']) !!}
             </div>
 
-            {!! Form::close() !!}
-
-    
             {!! Form::close() !!}
     
         </div>
