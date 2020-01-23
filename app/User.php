@@ -11,6 +11,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    protected $defaultImage = 'defaultUser.png';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -55,6 +57,11 @@ class User extends Authenticatable implements MustVerifyEmail
     *--------------------------------------------------------------------------
     */
 
+    public function getDefaultImageAttribute($value){
+
+        return '/img/' . $this->defaultImage;
+    }
+
     public function setPasswordAttribute($value){
 
         $this->attributes['password'] = Hash::make($value);
@@ -74,5 +81,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function photo(){
 
         return $this->belongsTo('App\Photo');
+    }
+
+    public function posts(){
+
+        return $this->hasMany('App\Post');
     }
 }

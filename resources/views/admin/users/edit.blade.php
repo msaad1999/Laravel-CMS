@@ -10,13 +10,13 @@
 
     <div class="row pb-5">
         <div class="col-sm-3">
-            <img class="img-fluid rounded" src="{{ $user->photo ? $user->photo->file : '/img/users/default.png' }}" width=200 height=100>
+            <img class="img-fluid rounded" src="{{ $user->photo ? $user->photo->file : $user->defaultImage }}" width=200 height=100>
         </div>
-    
+
         <div class="col-sm-9">
-            
+
             {!! Form::model($user, ['method'=>'PATCH', 'action'=>['AdminUsersController@update', $user->id], 'files'=>true]) !!}
-    
+
             <div class="form-group">
                 {!! Form::label('name', 'Name: ') !!}
                 {!! Form::text('name', null, ['class'=>'form-control']) !!}
@@ -26,7 +26,7 @@
                     </span>
                 @enderror
             </div>
-    
+
             <div class="form-group">
                 {!! Form::label('email', 'Email: ') !!}
                 {!! Form::email('email', null, ['class'=>'form-control']) !!}
@@ -36,7 +36,7 @@
                     </span>
                 @enderror
             </div>
-    
+
             <div class="form-group">
                 {!! Form::label('role_id', 'Role: ') !!}
                 {!! Form::select('role_id', $roles, null, ['class'=>'form-control']) !!}
@@ -46,7 +46,7 @@
                     </span>
                 @enderror
             </div>
-    
+
             <div class="form-group">
                 {!! Form::label('is_active', 'Status: ') !!}
                 {!! Form::select('is_active', [1=>'Active', 0=>'Not Active'], null, ['class'=>'form-control']) !!}
@@ -56,7 +56,7 @@
                     </span>
                 @enderror
             </div>
-    
+
             <div class="form-group">
                 {!! Form::label('photo_id', 'File: ') !!}
                 {!! Form::file('photo_id', null, ['class'=>'form-control']) !!}
@@ -66,7 +66,7 @@
                     </span>
                 @enderror
             </div>
-    
+
             <div class="form-group">
                 {!! Form::label('password', 'Password: ') !!}
                 {!! Form::password('password', ['class'=>'form-control']) !!}
@@ -76,14 +76,14 @@
                     </span>
                 @enderror
             </div>
-    
+
             <div class="form=group">
                 {!! Form::submit('Update User', ['class'=>'btn btn-primary']) !!}
             </div>
 
-            
 
-    
+
+
             {!! Form::close() !!}
 
             {!! Form::model($user, ['method'=>'DELETE', 'action'=>['AdminUsersController@destroy', $user->id]]) !!}
@@ -93,7 +93,7 @@
             </div>
 
             {!! Form::close() !!}
-    
+
         </div>
     </div>
 
