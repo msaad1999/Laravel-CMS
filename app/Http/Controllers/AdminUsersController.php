@@ -62,7 +62,7 @@ class AdminUsersController extends Controller
 
             $name = time() . $file->getClientOriginalName();
 
-            $file->move('/img', $name);
+            $file->move('img', $name);
 
             $photo = Photo::create(['file'=>$name]);
 

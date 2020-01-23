@@ -29,7 +29,7 @@
             @foreach($posts as $post)
             <tr>
                 <td>{{ $post->id }}</td>
-                <td><img src='{{ is_null($post->photo) ? $post->defaultImage : $post->photo->file }}' class="rounded-circle" width=40 height=40></td>
+                <td><img src='{{ is_null($post->photo) ? $post->defaultImage : $post->photo->file }}' class="rounded" width=50 height=40></td>
                 <td><a href="{{ route('posts.edit', $post->id) }}">{{ $post->title }}</a></td>
                 <td><a href="{{ route('users.edit', $post->user->id) }}">{{  $post->user->name   }}</a></td>
                 {{-- <td>{{ $posts->category->name }}</td> --}}
