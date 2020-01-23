@@ -52,7 +52,7 @@ class AdminUsersController extends Controller
         if(trim($request->password) == ''){
 
             $input = $request->except('password');
-        } 
+        }
         else {
 
             $input = $request->all();
@@ -62,11 +62,11 @@ class AdminUsersController extends Controller
 
             $name = time() . $file->getClientOriginalName();
 
-            $file->move('img/users', $name);
+            $file->move('/img', $name);
 
             $photo = Photo::create(['file'=>$name]);
 
-            $input['photo_id'] = $photo->id; 
+            $input['photo_id'] = $photo->id;
         }
 
         User::create($input);
@@ -115,7 +115,7 @@ class AdminUsersController extends Controller
         if(trim($request->password) == ''){
 
             $input = $request->except('password');
-        } 
+        }
         else {
 
             $input = $request->all();
@@ -126,7 +126,7 @@ class AdminUsersController extends Controller
         if($file = $request->file('photo_id')){
 
             $name = time().$file->getClientOriginalName();
-            $file->move('img/users', $name);    
+            $file->move('img', $name);
 
             $photo = Photo::create(['file'=>$name]);
 
@@ -137,6 +137,7 @@ class AdminUsersController extends Controller
                 unlink(public_path() . $user->photo->file);
                 Photo::findOrFail($user->photo->id)->delete();
             }
+
         }
 
         $user->update($input);
@@ -147,7 +148,7 @@ class AdminUsersController extends Controller
         ]);
 
         return redirect(route('users.index'));
-        
+
     }
 
     /**
