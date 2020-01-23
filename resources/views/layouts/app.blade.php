@@ -53,7 +53,7 @@
 
     <script src="{{ asset('js/libs.js') }}"></script>
 
-    // custom and/or component scripts
+    {{-- custom and/or component scripts --}}
     @stack('scripts')
 
 </body>

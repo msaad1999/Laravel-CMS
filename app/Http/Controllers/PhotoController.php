@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo;
 use Illuminate\Http\Request;
-use App\User;
-use App\Role;
-use App\http\Requests\UsersRequest;
 
-class AdminUsersController extends Controller
+class PhotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,7 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-
-        return view('admin.users.index', compact('users'));
+        //
     }
 
     /**
@@ -29,10 +25,6 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-
-        $roles = Role::pluck('name', 'id')->all();
-
-        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -41,24 +33,18 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsersRequest $request)
+    public function store(Request $request)
     {
         //
-
-        User::create($request->all());
-
-        return redirect('/admin/users');
-
-        return $request->all();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Photo $photo)
     {
         //
     }
@@ -66,10 +52,10 @@ class AdminUsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Photo $photo)
     {
         //
     }
@@ -78,10 +64,10 @@ class AdminUsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Photo $photo)
     {
         //
     }
@@ -89,10 +75,10 @@ class AdminUsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Photo $photo)
     {
         //
     }

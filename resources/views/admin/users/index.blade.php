@@ -8,7 +8,7 @@
         <h1 class="h3 mb-0 text-gray-800">Users</h1>
     </div>
 
-    @include('layouts.components.datatable')
+    @include('layouts.components.datatable', ['data' => $users])
 
 </div>
 
