@@ -14,6 +14,11 @@ class Photo extends Model
 
     public function getFileAttribute($value){
 
+        if(empty($value)){
+
+            $value = 'default.png';
+        }
+
         return $this->path . $value;
     }
 

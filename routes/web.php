@@ -13,15 +13,20 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('/admin', function(){
 
     return view('layouts.admin');
 })->name('dashboard');
 
-Route::resource('admin/users', 'AdminUsersController');
+
+
+Route::group(['middleware'=>'admin'], function(){
+
+    Route::resource('admin/users', 'AdminUsersController');
+});

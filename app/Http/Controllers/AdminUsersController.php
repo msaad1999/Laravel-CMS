@@ -47,7 +47,7 @@ class AdminUsersController extends Controller
     {
         //
 
-        if(trim($request->password) = ''){
+        if(trim($request->password) == ''){
 
             $input = $request->except('password');
         } 
@@ -110,7 +110,7 @@ class AdminUsersController extends Controller
     {
         //
 
-        if(trim($request->password) = ''){
+        if(trim($request->password) == ''){
 
             $input = $request->except('password');
         } 
@@ -146,5 +146,9 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+
+        User::findOrFail($id)->delete();
+
+        return redirect(route('users.index'));
     }
 }

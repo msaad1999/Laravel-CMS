@@ -40,13 +40,7 @@
             @foreach($users as $user)
               <tr>
                 <td>{{ $user->id }}</td>
-                <td>
-                  @if ($user->photo)
-                    <img src='{{ $user->photo->file }}' width=40 height=40>
-                  @else
-                    --
-                  @endif
-                </td>
+                <td><img src='{{ is_null($user->photo) ? '/img/users/default.png' : $user->photo->file }}' class="rounded-circle" width=40 height=40></td>
                 <td><a href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role->name }}</td>

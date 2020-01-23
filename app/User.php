@@ -38,6 +38,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin() {
+
+        if($this->role->name == 'administrator'){
+
+            return true;
+        }
+
+        return false;
+    }
+
 
     /*
     *--------------------------------------------------------------------------
