@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container-fluid">
+
+    @if(Session::has('status'))
+        <p class="text-{{ session('status')['class'] }}">{{ session('status')['message'] }}</p>
+    @endif
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+    </div>
+
+    @component('layouts.components.datatable')
+    @slot('headings')
+        <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Posts</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        </tr>
+    @endslot
+    @slot('body')
+        @if($categories)
+            @foreach($categories as $category)
+            <tr>
+                <td>{{ $category->id }}</td>
+                <td><a href="{{ route('categories.edit', $category->id) }}">{{ $category->name }}</a></td>
+                <td>{{ $category->posts()->count() }}</td>
+                <td>{{ $category->created_at->diffForHumans() }}</td>
+                <td>{{ $category->updated_at->diffForHumans() }}</td>
+            </tr>
+            @endforeach
+        @endif
+    @endslot
+    @endcomponent
+
+</div>
+
+@endsection
+
+

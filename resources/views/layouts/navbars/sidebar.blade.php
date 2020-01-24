@@ -28,63 +28,45 @@
     </div>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usermanagement" aria-expanded="true" aria-controls="usermanagement">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>User Management</span>
-      </a>
-      <div id="usermanagement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
-          <a class="collapse-item" href="{{ route('users.index') }}">View Users</a>
-          <a class="collapse-item" href="{{ route('users.create') }}">Create User</a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usermanagement" aria-expanded="true" aria-controls="usermanagement">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>User Management</span>
+        </a>
+        <div id="usermanagement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+            {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
+            <a class="collapse-item" href="{{ route('users.index') }}">View Users</a>
+            <a class="collapse-item" href="{{ route('users.create') }}">Create User</a>
+            </div>
         </div>
-      </div>
     </li>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postmanagement" aria-expanded="true" aria-controls="postmanagement">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Post Management</span>
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Post Management</span>
         </a>
         <div id="postmanagement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
+            <div class="bg-white py-2 collapse-inner rounded">
             {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
             <a class="collapse-item" href="{{ route('posts.index') }}">View Posts</a>
             <a class="collapse-item" href="{{ route('posts.create') }}">Create Post</a>
-          </div>
+            </div>
         </div>
-      </li>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Components</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Custom Components:</h6>
-          <a class="collapse-item" href="buttons.html">Buttons</a>
-          <a class="collapse-item" href="cards.html">Cards</a>
-        </div>
-      </div>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-wrench"></i>
-        <span>Utilities</span>
-      </a>
-      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Custom Utilities:</h6>
-          <a class="collapse-item" href="utilities-color.html">Colors</a>
-          <a class="collapse-item" href="utilities-border.html">Borders</a>
-          <a class="collapse-item" href="utilities-animation.html">Animations</a>
-          <a class="collapse-item" href="utilities-other.html">Other</a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoriesmanagement" aria-expanded="true" aria-controls="categoriesmanagement">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Categories Management</span>
+        </a>
+        <div id="categoriesmanagement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+            {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
+            <a class="collapse-item" href="{{ route('categories.index') }}">View Categories</a>
+            <a class="collapse-item" href="{{ route('categories.create') }}">Create Category</a>
+            </div>
         </div>
-      </div>
     </li>
 
     <!-- Divider -->
