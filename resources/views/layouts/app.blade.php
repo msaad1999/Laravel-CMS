@@ -18,6 +18,9 @@
 
     <!-- CSS -->
     <link href="{{ asset('css/libs.css') }}" rel="stylesheet" type="text/css">
+
+    {{-- custom and/or component scripts --}}
+    @stack('styles')
 </head>
 
 <body id="page-top">
