@@ -21,7 +21,7 @@
             {!! Form::open(['method'=>'POST', 'action'=>'AdminCategoriesController@store']) !!}
 
                 <div class="form-group">
-                    {!! Form::label('name', 'Name: ') !!}
+                    {!! Form::label('name', 'Name') !!}
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
                     @error('name')
                         <span class="text-danger small">
@@ -57,7 +57,11 @@
             @foreach($categories as $category)
             <tr>
                 <td>{{ $category->id }}</td>
-                <td><a href="{{ route('categories.edit', $category->id) }}">{{ $category->name }}</a></td>
+                <td>
+                    <a href="{{ route('categories.edit', $category->id) }}">
+                        {{ $category->name }}
+                    </a>
+                </td>
                 <td>{{ $category->posts()->count() }}</td>
                 <td>{{ $category->created_at->diffForHumans() }}</td>
                 <td>{{ $category->updated_at->diffForHumans() }}</td>
