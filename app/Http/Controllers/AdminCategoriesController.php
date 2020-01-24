@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\http\Requests\PostsCreateRequest;
+use App\http\Requests\CategoriesCreateRequest;
 use Illuminate\Support\Facades\Session;
 use App\Photo;
 use App\User;
@@ -45,9 +45,13 @@ class AdminCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesCreateRequest $request)
     {
         //
+
+        Category::create($request->all());
+
+        return redirect(route('categories.index'));
     }
 
     /**

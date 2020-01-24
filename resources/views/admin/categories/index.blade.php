@@ -8,11 +8,41 @@
         <p class="text-{{ session('status')['class'] }}">{{ session('status')['message'] }}</p>
     @endif
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 py-4 text-right">
+            {!! Form::open(['method'=>'POST', 'action'=>'AdminCategoriesController@store']) !!}
+
+                <div class="form-group">
+                    {!! Form::label('name', 'Name: ') !!}
+                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                    @error('name')
+                        <span class="text-danger small">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form=group">
+                    {!! Form::submit('Create Category', ['class'=>'btn btn-primary']) !!}
+                </div>
+
+            {!! Form::close() !!}
+        </div>
     </div>
 
+
     @component('layouts.components.datatable')
+    @slot('title')
+        All Categories
+    @endslot
     @slot('headings')
         <tr>
         <th>ID</th>
