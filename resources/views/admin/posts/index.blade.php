@@ -12,7 +12,10 @@
         <h1 class="h3 mb-0 text-gray-800">Posts</h1>
     </div>
 
-    @component('layouts.components.datatable'   )
+    @component('layouts.components.datatable')
+    @slot('title')
+        All Posts
+    @endslot
     @slot('headings')
         <tr>
         <th>ID</th>
