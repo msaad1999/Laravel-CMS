@@ -168,4 +168,9 @@ class AdminPostsController extends Controller
 
         return redirect(route('posts.index'));
     }
+
+    public function post(){
+
+        return view('post');
+    }
 }

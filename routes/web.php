@@ -19,14 +19,14 @@ Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-Route::get('/admin', function(){
-
-    return view('layouts.admin');
-})->name('dashboard');
-
-
+Route::get('/post/{id}', 'AdminPostsController@post');
 
 Route::group(['middleware'=>'admin'], function(){
+
+    Route::get('/admin', function(){
+
+        return view('layouts.admin');
+    })->name('dashboard');
 
     Route::resource('admin/users', 'AdminUsersController');
 
@@ -36,7 +36,7 @@ Route::group(['middleware'=>'admin'], function(){
 
     Route::resource('admin/media', 'AdminMediaController');
 
-    Route::resource('admin/comments/', 'PostCommentsController');
+    Route::resource('admin/comments', 'PostCommentsController');
 
     Route::resource('admin/comment/replies', 'CommentRepliesController');
 });

@@ -52,6 +52,7 @@
             {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
             <a class="collapse-item" href="{{ route('posts.index') }}">View Posts</a>
             <a class="collapse-item" href="{{ route('posts.create') }}">Create Post</a>
+            <a class="collapse-item" href="{{ route('comments.index') }}">Manage Comments</a>
             </div>
         </div>
     </li>
