@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Comment;
 
 class PostCommentsController extends Controller
 {
@@ -37,6 +39,16 @@ class PostCommentsController extends Controller
     public function store(Request $request)
     {
         //
+
+        $user = Auth::user();
+
+        $data = [
+            'post_id' => $request->post_id,
+            'author' => $user->name
+        ];
+
+        Comment::create($request->all());
+        return redirect('');
     }
 
     /**

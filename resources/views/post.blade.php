@@ -38,12 +38,12 @@
       <hr>
 
       <!-- Preview Image -->
-      <img class="img-fluid rounded" src="{{ $post->photo->file }}" alt="">
+      <img class="img-fluid rounded py-3" src="{{ $post->photo->file }}" alt="">
 
       <hr>
 
       <!-- Post Content -->
-      <p>{{ $post->body }}</p>
+      <p class="py-3">{{ $post->body }}</p>
 
       <hr>
 
@@ -51,12 +51,32 @@
       <div class="card my-4">
         <h5 class="card-header">Leave a Comment:</h5>
         <div class="card-body">
-          <form>
+          {{-- <form>
             <div class="form-group">
               <textarea class="form-control" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+          </form> --}}
+
+            {!! Form::open(['method'=>'POST', 'action'=>'PostCommentsController@store']) !!}
+
+                <input type="hidden" name="post_id" value="{{ $post->id }}">
+
+                <div class="form-group">
+                    {{-- {!! Form::label('body', 'Body: ') !!} --}}
+                    {!! Form::textarea('body', null,  ['class'=>'form-control', 'rows'=>5]) !!}
+                    @error('body')
+                        <span class="text-danger small">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form=group">
+                    {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}
+                </div>
+
+            {!! Form::close() !!}
         </div>
       </div>
 
