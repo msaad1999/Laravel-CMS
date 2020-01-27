@@ -58,18 +58,10 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoriesmanagement" aria-expanded="true" aria-controls="categoriesmanagement">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Categories Management</span>
-        </a>
-        <div id="categoriesmanagement" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
-            <a class="collapse-item" href="{{ route('categories.index') }}">View Categories</a>
-            <a class="collapse-item" href="{{ route('categories.create') }}">Create Category</a>
-            </div>
-        </div>
-    </li>
+        <a class="nav-link" href="{{ route('categories.index') }}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Categories</span></a>
+      </li>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mediamanagement" aria-expanded="true" aria-controls="mediamanagement">

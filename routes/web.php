@@ -19,7 +19,7 @@ Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-Route::get('/post/{id}', 'AdminPostsController@post');
+Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post']);
 
 Route::group(['middleware'=>'admin'], function(){
 
