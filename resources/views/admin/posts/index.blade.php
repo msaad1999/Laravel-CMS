@@ -23,6 +23,8 @@
         <th>Title</th>
         <th>Author</th>
         <th>Category</th>
+        <th>Post Link</th>
+        <th>Comments</th>
         <th>Created At</th>
         <th>Updated At</th>
         </tr>
@@ -31,13 +33,23 @@
         @if($posts)
             @foreach($posts as $post)
             <tr>
-                <td>{{ $post->id }}</td>
-                <td><img src='{{ is_null($post->photo) ? $post->defaultImage : $post->photo->file }}' class="rounded" width=50 height=40></td>
-                <td><a href="{{ route('posts.edit', $post->id) }}">{{ $post->title }}</a></td>
-                <td><a href="{{ route('users.edit', $post->user->id) }}">{{  $post->user->name   }}</a></td>
-                <td>{{ $post->category ? $post->category->name : 'Uncategorized' }}</td>
-                <td>{{ $post->created_at->diffForHumans() }}</td>
-                <td>{{ $post->updated_at->diffForHumans() }}</td>
+                <td><small>{{ $post->id }}</small></td>
+                <td><img src='{{ is_null($post->photo) ? $post->defaultImage : $post->photo->file }}' class="rounded" width=50 height=40></small></td>
+                <td><small><a href="{{ route('posts.edit', $post->id) }}">{{ $post->title }}</a></small></td>
+                <td><small><a href="{{ route('users.edit', $post->user->id) }}">{{ $post->user->name }}</a></small></td>
+                <td><small>{{ $post->category ? $post->category->name : 'Uncategorized' }}</small></td>
+                <td><small>
+                    <a href="{{ route('home.post', $post->id) }}">
+                        View
+                    </a></small>
+                </td>
+                <td><small>
+                    <a href="{{ route('comments.show', $post->id) }}">
+                        View Comments
+                    </a></small>
+                </td>
+                <td><small>{{ $post->created_at->diffForHumans() }}</small></td>
+                <td><small>{{ $post->updated_at->diffForHumans() }}</small></td>
             </tr>
             @endforeach
         @endif

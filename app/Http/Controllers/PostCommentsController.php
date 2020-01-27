@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Post;
+use Illuminate\Support\Facades\Session;
 
 class PostCommentsController extends Controller
 {
@@ -17,7 +19,9 @@ class PostCommentsController extends Controller
     {
         //
 
-        return view('admin.comments.index');
+        $comments = Comment::all();
+
+        return view('admin.comments.index', compact('comments'));
     }
 
     /**
@@ -44,11 +48,16 @@ class PostCommentsController extends Controller
 
         $data = [
             'post_id' => $request->post_id,
-            'author' => $user->name
+            'user_id' => $user->id,
+            'body' => $request->body,
         ];
 
         Comment::create($request->all());
-        return redirect('');
+        Session::flash('comment_status', [
+            'class' => 'success',
+            'message' => 'comment submitted, awaiting moderation',
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -60,6 +69,8 @@ class PostCommentsController extends Controller
     public function show($id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('admin.comments.show', compact('post'));
     }
 
     /**
@@ -83,6 +94,10 @@ class PostCommentsController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        Comment::findOrFail($id)->update($request->all());
+
+        return redirect()->back();
     }
 
     /**
@@ -94,5 +109,8 @@ class PostCommentsController extends Controller
     public function destroy($id)
     {
         //
+
+        Comment::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

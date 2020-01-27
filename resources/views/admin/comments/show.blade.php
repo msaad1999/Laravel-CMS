@@ -9,20 +9,20 @@
     @endif
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Comments</h1>
+        <h1 class="h3 mb-0 text-gray-800">Post Comments</h1>
     </div>
 
     @component('layouts.components.datatable')
     @slot('title')
-        All Comments
+        <a href="{{route('home.post', $post->id)}}">
+            {{ $post->title }}
+        </a>
     @endslot
     @slot('headings')
         <tr>
         <th>ID</th>
         <th>User</th>
-        <th>Post</th>
         <th>Content</th>
-        <th>Post Link</th>
         <th>Moderation</th>
         <th>Delete</th>
         <th>Created At</th>
@@ -30,8 +30,8 @@
         </tr>
     @endslot
     @slot('body')
-        @if($comments)
-            @foreach($comments as $comment)
+        @if($post->comments)
+            @foreach($post->comments as $comment)
             <tr>
                 <td>{{ $comment->id }}</td>
                 <td>
@@ -39,17 +39,7 @@
                         {{ $comment->user->name }}
                     </a>
                 </td>
-                <td>
-                    <a href="{{ route('posts.edit', $comment->post->id) }}">
-                        {{ $comment->post->title }}
-                    </a>
-                </td>
                 <td>{{ $comment->body }}</td>
-                <td>
-                    <a href="{{ route('home.post', $comment->post->id) }}">
-                        View Post
-                    </a>
-                </td>
                 <td>
                     @if($comment->is_active == 1)
                         {!! Form::open(['method'=>'PATCH', 'action'=>['PostCommentsController@update', $comment->id]]) !!}
@@ -93,3 +83,8 @@
 </div>
 
 @endsection
+
+
+
+
+

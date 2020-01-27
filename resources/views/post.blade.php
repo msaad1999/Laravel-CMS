@@ -1,17 +1,3 @@
-{{-- @extends('layouts.blog-post')
-
-@section('title')
-{{ $post->title }}
-@endsection
-@section('post-image')
-{{ $post->photo->file }}
-@endsection
-@section('body')
-{{ $post->body }}
-@endsection
- --}}
-
-
 @extends('layouts.blog-post')
 
 @section('content')
@@ -51,19 +37,16 @@
       <div class="card my-4">
         <h5 class="card-header">Leave a Comment:</h5>
         <div class="card-body">
-          {{-- <form>
-            <div class="form-group">
-              <textarea class="form-control" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form> --}}
+            @if(Session::has('comment_status'))
+                <p class="text-{{ session('comment_status')['class'] }}">{{ session('comment_status')['message'] }}</p>
+            @endif
 
             {!! Form::open(['method'=>'POST', 'action'=>'PostCommentsController@store']) !!}
 
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                 <div class="form-group">
-                    {{-- {!! Form::label('body', 'Body: ') !!} --}}
                     {!! Form::textarea('body', null,  ['class'=>'form-control', 'rows'=>5]) !!}
                     @error('body')
                         <span class="text-danger small">
@@ -80,40 +63,58 @@
         </div>
       </div>
 
-      <!-- Single Comment -->
-      <div class="media mb-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-          <h5 class="mt-0">Commenter Name</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-      </div>
+        @auth
 
-      <!-- Comment with nested comments -->
-      <div class="media mb-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-          <h5 class="mt-0">Commenter Name</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            @foreach($post->comments as $comment)
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" width='50' height='50'
+                    src="{{$comment->user->photo ? $comment->user->photo->file : $comment->user->defaultImage }}" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">
+                        {{ $comment->user->name }}
+                        <small>{{ $comment->created_at->diffForHumans() }}</small>
+                    </h5>
+                    {{ $comment->body }}
+                </div>
+            </div>
+            @endforeach
 
-          <div class="media mt-4">
+        @endauth
+
+        {{-- <!-- Single Comment -->
+        <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            <h5 class="mt-0">Commenter Name</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
             </div>
-          </div>
+        </div>
 
-          <div class="media mt-4">
+        <!-- Comment with nested comments -->
+        <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-          </div>
+            <h5 class="mt-0">Commenter Name</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
 
-        </div>
-      </div>
+            <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+
+            <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+
+            </div>
+        </div> --}}
 
     </div>
 
