@@ -33,88 +33,109 @@
 
       <hr>
 
-      <!-- Comments Form -->
-      <div class="card my-4">
-        <h5 class="card-header">Leave a Comment:</h5>
-        <div class="card-body">
-            @if(Session::has('comment_status'))
-                <p class="text-{{ session('comment_status')['class'] }}">{{ session('comment_status')['message'] }}</p>
-            @endif
-
-            {!! Form::open(['method'=>'POST', 'action'=>'PostCommentsController@store']) !!}
-
-                <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-
-                <div class="form-group">
-                    {!! Form::textarea('body', null,  ['class'=>'form-control', 'rows'=>5]) !!}
-                    @error('body')
-                        <span class="text-danger small">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form=group">
-                    {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}
-                </div>
-
-            {!! Form::close() !!}
-        </div>
-      </div>
-
         @auth
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    @if(Session::has('comment_status'))
+                        <p class="text-{{ session('comment_status')['class'] }}">{{ session('comment_status')['message'] }}</p>
+                    @endif
 
-            @foreach($post->comments as $comment)
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" width='50' height='50'
-                    src="{{$comment->user->photo ? $comment->user->photo->file : $comment->user->defaultImage }}" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">
-                        {{ $comment->user->name }}
-                        <small>{{ $comment->created_at->diffForHumans() }}</small>
-                    </h5>
-                    {{ $comment->body }}
+                    {!! Form::open(['method'=>'POST', 'action'=>'PostCommentsController@store']) !!}
+
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+                        <div class="form-group">
+                            {!! Form::textarea('body', null,  ['class'=>'form-control', 'rows'=>5]) !!}
+                            @error('body')
+                                <span class="text-danger small">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form=group">
+                            {!! Form::submit('Comment', ['class'=>'btn btn-primary']) !!}
+                        </div>
+
+                    {!! Form::close() !!}
                 </div>
             </div>
+
+            @foreach($post->comments()->where('is_active', 1)->get() as $comment)
+
+
+
+                <div class="media mb-4">
+                    <div class="row">
+                        <img class="d-flex mr-3 rounded-circle" width='50' height='50'
+                            src="{{$comment->user->photo ? $comment->user->photo->file : $comment->user->defaultImage }}" alt="">
+                        <div class="media-body">
+                            <h5 class="mt-0 text-capitalize">
+                                {{ $comment->user->name }}
+                                <span class="small">{{ $comment->created_at->diffForHumans() }}</span>
+                            </h5>
+                            {{ $comment->body }}
+
+                            <div class="replies">
+                                @foreach($comment->replies()->where('is_active', 1)->get() as $reply)
+
+                                    <div class="media mt-4">
+                                        <div class="row">
+                                            <img class="d-flex mr-3 rounded-circle" width='50' height='50'
+                                                    src="{{$reply->user->photo ? $reply->user->photo->file : $reply->user->defaultImage }}" alt="">
+                                            <div class="media-body">
+                                                <h5 class="mt-0 text-capitalize">
+                                                    {{ $reply->user->name }}
+                                                    <small class="small">{{ $reply->created_at->diffForHumans() }}</small>
+                                                </h5>
+                                                <p>{{ $reply->body }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="toggle-reply-form btn btn-default text-primary px-2 font-weight-bold small">Reply</button>
+                    <button class="toggle-replies btn btn-default text-dark px-2 font-weight-bold small">Show Replies</button>
+                </div>
+                <div class="reply-form">
+                    {!! Form::open(['method'=>'POST', 'action'=>'CommentRepliesController@createReply', 'class'=>'my-4']) !!}
+
+                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="form-group">
+                                    {!! Form::text('body', null,  ['class'=>'form-control']) !!}
+                                    @error('body')
+                                        <span class="text-danger small">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form=group">
+                                    {!! Form::submit('Reply', ['class'=>'btn btn-default text-primary font-weight-bold']) !!}
+                                </div>
+                            </div>
+                            <div class="col-5 px-1"></div>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+
+                <hr class="mb-5" style="width:50%">
+
             @endforeach
 
         @endauth
-
-        {{-- <!-- Single Comment -->
-        <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-        </div>
-
-        <!-- Comment with nested comments -->
-        <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-            <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-
-            <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-
-            </div>
-        </div> --}}
 
     </div>
 
@@ -180,5 +201,34 @@
     </div>
 
 </div>
+
+
+
+@push('styles')
+<style>
+
+    .replies, .reply-form{
+        display: none;
+    }
+
+</style>
+@endpush
+
+@push('scripts')
+<script>
+
+    $(document).ready(function() {
+        $('.toggle-reply-form').click(function(){
+            // alert('a');
+            $(this).parent().next().slideToggle('fast');
+        });
+        $('.toggle-replies').click(function(){
+            // alert('a');
+            $(this).parent().prev().find('.replies').slideToggle('fast');
+        });
+    });
+
+</script>
+@endpush
 
 @endsection

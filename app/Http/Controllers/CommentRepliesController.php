@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+
+use App\CommentReply;
 
 class CommentRepliesController extends Controller
 {
@@ -35,6 +39,16 @@ class CommentRepliesController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function createReply(Request $request)
+    {
+        CommentReply::create($request->all());
+        Session::flash('comment_status', [
+            'class' => 'success',
+            'message' => 'reply submitted, awaiting moderation',
+        ]);
+        return redirect()->back();
     }
 
     /**

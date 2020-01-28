@@ -42,16 +42,6 @@ class PostCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
-        $user = Auth::user();
-
-        $data = [
-            'post_id' => $request->post_id,
-            'user_id' => $user->id,
-            'body' => $request->body,
-        ];
-
         Comment::create($request->all());
         Session::flash('comment_status', [
             'class' => 'success',
