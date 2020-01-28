@@ -9,13 +9,14 @@
     @endif
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Post Comments</h1>
+        <h1 class="h3 mb-0 text-gray-800">Comment Replies</h1>
     </div>
 
     @component('layouts.components.datatable')
     @slot('title')
-        <a href="{{route('home.post', $post->id)}}">
-            {{ $post->title }}
+        Comment By:
+        <a href="{{route('users.edit', $comment->user->id)}}">
+            {{ $comment->user->name }}
         </a>
     @endslot
     @slot('headings')
@@ -23,7 +24,6 @@
         <th>ID</th>
         <th>User</th>
         <th>Content</th>
-        <th>Replies</th>
         <th>Moderation</th>
         <th>Delete</th>
         <th>Created At</th>
@@ -31,24 +31,19 @@
         </tr>
     @endslot
     @slot('body')
-        @if($post->comments)
-            @foreach($post->comments as $comment)
+        @if($comment->replies)
+            @foreach($comment->replies as $reply)
             <tr>
-                <td>{{ $comment->id }}</td>
+                <td>{{ $reply->id }}</td>
                 <td>
-                    <a href="{{ route('users.edit', $comment->user->id) }}">
-                        {{ $comment->user->name }}
+                    <a href="{{ route('users.edit', $reply->user->id) }}">
+                        {{ $reply->user->name }}
                     </a>
                 </td>
-                <td>{{ $comment->body }}</td>
+                <td>{{ $reply->body }}</td>
                 <td>
-                    <a href="{{ route('replies.show', $comment->id) }}">
-                        View Replies
-                    </a>
-                </td>
-                <td>
-                    @if($comment->is_active == 1)
-                        {!! Form::open(['method'=>'PATCH', 'action'=>['PostCommentsController@update', $comment->id]]) !!}
+                    @if($reply->is_active == 1)
+                        {!! Form::open(['method'=>'PATCH', 'action'=>['CommentRepliesController@update', $reply->id]]) !!}
 
                             <input type="hidden" name="is_active" value="0">
 
@@ -57,8 +52,8 @@
                             </div>
 
                         {!! Form::close() !!}
-                    @elseif($comment->is_active == 0)
-                        {!! Form::open(['method'=>'PATCH', 'action'=>['PostCommentsController@update', $comment->id]]) !!}
+                    @elseif($reply->is_active == 0)
+                        {!! Form::open(['method'=>'PATCH', 'action'=>['CommentRepliesController@update', $reply->id]]) !!}
 
                             <input type="hidden" name="is_active" value="1">
 
@@ -70,7 +65,7 @@
                     @endif
                 </td>
                 <td>
-                    {!! Form::open(['method'=>'DELETE', 'action'=>['PostCommentsController@destroy', $comment->id]]) !!}
+                    {!! Form::open(['method'=>'DELETE', 'action'=>['CommentRepliesController@destroy', $reply->id]]) !!}
 
                         <div class="form=group">
                             {!! Form::submit('Delete', ['class'=>'btn btn-default p-0 text-danger']) !!}
@@ -78,8 +73,8 @@
 
                     {!! Form::close() !!}
                 </td>
-                <td>{{ $comment->created_at->diffForHumans() }}</td>
-                <td>{{ $comment->updated_at->diffForHumans() }}</td>
+                <td>{{ $reply->created_at->diffForHumans() }}</td>
+                <td>{{ $reply->updated_at->diffForHumans() }}</td>
             </tr>
             @endforeach
         @endif
