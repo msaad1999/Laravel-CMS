@@ -3,16 +3,33 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    //
+    use Sluggable;
 
     protected $defaultImage = 'defaultPost.png';
 
     protected $fillable = [
         'user_id', 'category_id', 'photo_id', 'title', 'body',
     ];
+
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'onUpdate' => true,
+            ]
+        ];
+    }
 
     /*
     *--------------------------------------------------------------------------

@@ -39,7 +39,7 @@
                 <td><small><a href="{{ route('users.edit', $post->user->id) }}">{{ $post->user->name }}</a></small></td>
                 <td><small>{{ $post->category ? $post->category->name : 'Uncategorized' }}</small></td>
                 <td><small>
-                    <a href="{{ route('home.post', $post->id) }}">
+                    <a href="{{ route('home.post', $post->slug) }}">
                         View
                     </a></small>
                 </td>
