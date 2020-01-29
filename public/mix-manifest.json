@@ -6,5 +6,7 @@
     "/js/components/chart-area.js": "/js/components/chart-area.js",
     "/js/components/chart-pie.js": "/js/components/chart-pie.js",
     "/js/components/chart-bar.js": "/js/components/chart-bar.js",
-    "/js/components/datatables.js": "/js/components/datatables.js"
+    "/js/components/datatables.js": "/js/components/datatables.js",
+    "/css/components/summernote.min.css": "/css/components/summernote.min.css",
+    "/js/components/summernote.min.js": "/js/components/summernote.min.js"
 }

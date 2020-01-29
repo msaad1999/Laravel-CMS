@@ -22,7 +22,7 @@
         <th>User</th>
         <th>Post</th>
         <th>Content</th>
-        <th>Post Link</th>
+        <th>Post</th>
         <th>Replies</th>
         <th>Moderation</th>
         <th>Delete</th>
@@ -47,7 +47,7 @@
                 </td>
                 <td>{{ $comment->body }}</td>
                 <td>
-                    <a href="{{ route('home.post', $comment->post->id) }}">
+                    <a href="{{ route('home.post', $comment->post->slug) }}">
                         View Post
                     </a>
                 </td>

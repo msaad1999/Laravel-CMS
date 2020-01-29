@@ -24,6 +24,7 @@
         <th>ID</th>
         <th>User</th>
         <th>Content</th>
+        <th>Post</th>
         <th>Moderation</th>
         <th>Delete</th>
         <th>Created At</th>
@@ -41,6 +42,11 @@
                     </a>
                 </td>
                 <td>{{ $reply->body }}</td>
+                <td>
+                    <a href="{{ route('home.post', $reply->comment->post->slug) }}">
+                        View Post
+                    </a>
+                </td>
                 <td>
                     @if($reply->is_active == 1)
                         {!! Form::open(['method'=>'PATCH', 'action'=>['CommentRepliesController@update', $reply->id]]) !!}

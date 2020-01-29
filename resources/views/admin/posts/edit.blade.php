@@ -77,3 +77,19 @@
 
 @endsection
 
+@push('styles')
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/components/summernote.min.css') }}"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+@endpush
+@push('scripts')
+    {{-- <script src='{{ asset('js/components/summernote.min.js') }}'></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#body').summernote({
+                height:300,
+            });
+        });
+    </script>
+@endpush
+

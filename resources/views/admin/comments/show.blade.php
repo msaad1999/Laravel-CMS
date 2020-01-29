@@ -23,6 +23,7 @@
         <th>ID</th>
         <th>User</th>
         <th>Content</th>
+        <th>Post</th>
         <th>Replies</th>
         <th>Moderation</th>
         <th>Delete</th>
@@ -41,6 +42,11 @@
                     </a>
                 </td>
                 <td>{{ $comment->body }}</td>
+                <td>
+                    <a href="{{ route('home.post', $comment->post->slug) }}">
+                        View Post
+                    </a>
+                </td>
                 <td>
                     <a href="{{ route('replies.show', $comment->id) }}">
                         View Replies

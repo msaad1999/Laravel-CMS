@@ -29,8 +29,7 @@
       <hr>
 
       <!-- Post Content -->
-      <p class="py-3">{{ $post->body }}</p>
-
+      <div class="py-3">{!! $post->body !!}</div>
       <hr>
 
         @auth
