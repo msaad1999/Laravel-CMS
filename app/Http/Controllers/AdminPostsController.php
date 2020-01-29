@@ -10,6 +10,8 @@ use App\User;
 use App\Post;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
+use \DOMDocument;
 
 
 
@@ -55,20 +57,57 @@ class AdminPostsController extends Controller
 
         $input = $request->all();
 
+        // Post Image
         if($file = $request->file('photo_id')) {
 
             $name = time() . $file->getClientOriginalName();
 
             $file->move('img', $name);
 
-            $photo = Photo::create(['file'=>$name]);
+            $photo = Photo::create([
+                'file' => $name,
+                'type' => 'post_image',
+                ]);
 
             $input['photo_id'] = $photo->id;
         }
 
-        $user = Auth::user();
-        $user->posts()->create($input);
+        // Post Content Images
+        // Post Content Images
+        $dom = new DomDocument();
+		$dom->loadHtml($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
 
+		foreach($images as $img){
+			$src = $img->getAttribute('src');
+
+			if(preg_match('/data:image/', $src)){
+
+				preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+				$mimetype = $groups['mime'];
+
+				$filename = uniqid();
+				$filepath = "/img/$filename.$mimetype";
+
+				$image = Image::make($src)
+				  ->encode($mimetype, 100)
+				  ->save(public_path($filepath));
+
+				$new_src = asset($filepath);
+				$img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+
+                Photo::create([
+                    'file'=>$filename.'.'.$mimetype,
+                    'type'=>'post_content_media'
+                    ]);
+			}
+		}
+
+        $input['body'] = $dom->saveHTML();
+
+        $user = Auth::user();
+        $post = $user->posts()->create($input);
         return redirect(route('posts.index'));
     }
 
@@ -113,6 +152,7 @@ class AdminPostsController extends Controller
         $post = Post::findOrFail($id);
         $input = $request->all();
 
+        // Post Image
         if($file = $request->file('photo_id')){
 
             $name = time().$file->getClientOriginalName();
@@ -126,11 +166,48 @@ class AdminPostsController extends Controller
             }
             else {
 
-                $photo = Photo::create(['file'=>$name]);
+                $photo = Photo::create([
+                    'file'=>$name,
+                    'type'=>'post_image'
+                    ]);
             }
             $input['photo_id'] = $photo->id;
         }
 
+        // Post Content Images
+        $dom = new DomDocument();
+		$dom->loadHtml($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+		foreach($images as $img){
+			$src = $img->getAttribute('src');
+
+			if(preg_match('/data:image/', $src)){
+
+				preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+				$mimetype = $groups['mime'];
+
+				$filename = uniqid();
+				$filepath = "/img/$filename.$mimetype";
+
+				$image = Image::make($src)
+				  ->encode($mimetype, 100)
+				  ->save(public_path($filepath));
+
+				$new_src = asset($filepath);
+				$img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+
+                Photo::create([
+                    'file'=>$filename.'.'.$mimetype,
+                    'type'=>'post_content_media',
+                    ]);
+			}
+		}
+
+		$input['body'] = $dom->saveHTML();
+
+        // Post Updation
         Auth::user()->posts()->whereId($id)->first()->update($input);
 
         Session::flash('status', [

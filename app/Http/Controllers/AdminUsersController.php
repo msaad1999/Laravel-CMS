@@ -64,7 +64,10 @@ class AdminUsersController extends Controller
 
             $file->move('img', $name);
 
-            $photo = Photo::create(['file'=>$name]);
+            $photo = Photo::create([
+                'file'=>$name,
+                'type'=>'user_image',
+                ]);
 
             $input['photo_id'] = $photo->id;
         }
@@ -128,7 +131,10 @@ class AdminUsersController extends Controller
             $name = time().$file->getClientOriginalName();
             $file->move('img', $name);
 
-            $photo = Photo::create(['file'=>$name]);
+            $photo = Photo::create([
+                'file'=>$name,
+                'type'=>'user_image',
+                ]);
 
             $input['photo_id'] = $photo->id;
 

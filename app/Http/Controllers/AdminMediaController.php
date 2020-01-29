@@ -25,7 +25,9 @@ class AdminMediaController extends Controller
         $file = $request->file('file');
         $name = time() . $file->getClientOriginalName();
         $file->move('img', $name);
-        Photo::create(['file'=>$name]);
+        Photo::create([
+            'file'=>$name,
+            ]);
     }
 
     public function destroy($id){
