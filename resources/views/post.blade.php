@@ -13,7 +13,7 @@
       <!-- Author -->
       <p class="lead">
         by
-        <a href="#">{{ $post->user->name }}</a>
+        <a href="{{ route('users.edit', $post->user->id) }}">{{  $post->user->name   }}</a>
       </p>
 
       <hr>
@@ -24,7 +24,7 @@
       <hr>
 
       <!-- Preview Image -->
-      <img class="img-fluid rounded py-3" src="{{ $post->photo->file }}" alt="">
+      <img class="img-fluid rounded py-3" src="{{ $post->photo ? $post->photo->file : $post->defaultImage }}" alt="">
 
       <hr>
 

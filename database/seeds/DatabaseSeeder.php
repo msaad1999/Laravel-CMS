@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+
     /**
      * Seed the application's database.
      *
@@ -11,6 +12,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(ForeignKeySeeder::class);
+        Schema::disableForeignKeyConstraints();
+
+        /*
+        *   Seeds
+        */
+
+        $this->call(UsersTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+
+
+        /*
+        *   Factories
+        */
+
+        factory(App\User::class, 10)->create()->each(function($user){
+            $user->posts()->save(factory(App\Post::class)->make());
+        });
+
+        factory(App\Comment::class,10)->create()->each(function($comment){
+            $comment->replies()->save(factory(App\CommentReply::class)->make());
+        });
+
+
+        Schema::enableForeignKeyConstraints();
     }
 }
