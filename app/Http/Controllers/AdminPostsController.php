@@ -18,6 +18,17 @@ use \DOMDocument;
 class AdminPostsController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('monitor')->only('index', 'show');
+        $this->middleware('moderator')->only('edit', 'update', 'create', 'store', 'delete');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -117,9 +128,11 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post =  Post::whereSlug($slug)->firstOrFail();
+
+        return view('post', compact('post'));
     }
 
     /**
@@ -208,7 +221,7 @@ class AdminPostsController extends Controller
 		$input['body'] = $dom->saveHTML();
 
         // Post Updation
-        Auth::user()->posts()->whereId($id)->first()->update($input);
+        Post::whereId($id)->first()->update($input);
 
         Session::flash('status', [
             'class' => 'success',
@@ -244,12 +257,5 @@ class AdminPostsController extends Controller
         ]);
 
         return redirect(route('posts.index'));
-    }
-
-    public function post($slug){
-
-        $post =  Post::whereSlug($slug)->firstOrFail();
-
-        return view('post', compact('post'));
     }
 }

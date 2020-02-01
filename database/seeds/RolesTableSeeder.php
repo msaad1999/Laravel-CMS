@@ -13,16 +13,23 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::create([
+            'name'          => 'viewer',
+            'description'   => 'Users registering for the festival.',
+        ]);
+
+    	Role::create([
             'name'          => 'administrator',
             'description'   => 'Application owner, has all privileges.',
         ]);
 
         Role::create([
-            'name'          => 'subscriber',
+            'name'          => 'moderator',
+            'description'   => 'Application moderator, has limited management privileges.',
         ]);
 
         Role::create([
-            'name'          => 'author',
+            'name'          => 'monitor',
+            'description'   => 'User granted the privilege of viewing application data.',
         ]);
     }
 }

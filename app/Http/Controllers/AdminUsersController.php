@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
+
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('admin')->only('edit', 'store', 'destroy', 'update', 'create');
+        $this->middleware('monitor')->only('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +44,6 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        //
-
         $roles = Role::pluck('name', 'id')->all();
 
         return view('admin.users.create', compact('roles'));
@@ -47,8 +57,6 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        //
-
         if(trim($request->password) == ''){
 
             $input = $request->except('password');
@@ -96,8 +104,6 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        //
-
         $user = User::findOrFail($id);
         $roles = Role::pluck('name', 'id')->all();
 
@@ -113,8 +119,6 @@ class AdminUsersController extends Controller
      */
     public function update(UsersEditRequest $request, $id)
     {
-        //
-
         if(trim($request->password) == ''){
 
             $input = $request->except('password');
@@ -165,8 +169,6 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
-
         $user = User::findOrFail($id);
 
         if($user->photo){

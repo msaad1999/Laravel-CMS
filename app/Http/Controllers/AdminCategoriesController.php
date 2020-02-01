@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Auth;
 class AdminCategoriesController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('monitor')->only('view');
+        $this->middleware('moderator');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

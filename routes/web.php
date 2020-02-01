@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+|   Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -11,15 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
 Auth::routes(['verify' => true]);
 
-// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/', ['as'=>'home', 'uses'=>'HomeController@index'])->middleware('verified');
 
-Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post']);
+/*
+*--------------------------------------------------------------------------
+*   Posts
+*--------------------------------------------------------------------------
+*/
+
+Route::get('/post/{id}', ['as'=>'post.show', 'uses'=>'AdminPostsController@show']);
+Route::get('/posts/', ['as'=>'post.index', 'uses'=>'AdminPostsController@index']);
+Route::get('/posts/{id}', ['as'=>'post.edit', 'uses'=>'AdminPostsController@edit']);
+Route::get('/posts/{id}', ['as'=>'post.create', 'uses'=>'AdminPostsController@create']);
+Route::patch('/posts/{id}', ['as'=>'post.create', 'uses'=>'AdminPostsController@create']);
+
+Route::resource('/posts', 'AdminPostsController');
 
 Route::group(['middleware'=>'admin'], function(){
 
@@ -30,7 +38,7 @@ Route::group(['middleware'=>'admin'], function(){
 
     Route::resource('admin/users', 'AdminUsersController');
 
-    Route::resource('admin/posts', 'AdminPostsController');
+
 
     Route::resource('admin/categories', 'AdminCategoriesController');
 

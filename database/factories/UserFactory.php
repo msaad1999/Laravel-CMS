@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->unique()->name,
-        'role_id' => $faker->numberBetween(1,3),
+        'role_id' => $faker->numberBetween(1,4),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => 'password',

@@ -7,7 +7,16 @@ use App\Photo;
 
 class AdminMediaController extends Controller
 {
-    //
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('monitor')->only('index');
+        $this->middleware('moderator')->except('view');
+    }
 
     public function index(){
 
