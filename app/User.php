@@ -95,4 +95,49 @@ class User extends Authenticatable implements MustVerifyEmail
     public function replies(){
         return $this->hasMany('App\CommentReply');
     }
+
+    /*
+    *--------------------------------------------------------------------------
+    * Middleware Functions
+    *--------------------------------------------------------------------------
+    */
+
+    public function isAdmin() {
+
+        if($this->role){
+            if($this->role->name == 'admin' && $this->is_active == 1){
+                return true;
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function isModerator() {
+
+        if($this->role){
+            if($this->role->name == 'moderator' && $this->is_active == 1){
+                return true;
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function isMonitor() {
+
+        if($this->role){
+            if($this->role->name == 'monitor' && $this->is_active == 1){
+                return true;
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
 }
