@@ -15,11 +15,6 @@
 
     {!! Form::open(['method'=>'POST', 'action'=>'AdminMediaController@store', 'class'=>'dropzone']) !!}
 
-
-        {{-- <div class="form=group">
-            {!! Form::submit('Create Category', ['class'=>'btn btn-primary']) !!}
-        </div> --}}
-
     {!! Form::close() !!}
 
 </div>

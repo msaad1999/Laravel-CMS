@@ -35,6 +35,7 @@ Route::group(['middleware'=>'admin'], function(){
     Route::resource('admin/categories', 'AdminCategoriesController');
 
     Route::resource('admin/media', 'AdminMediaController');
+    Route::post('admin/media-bulkdelete', ['as'=>'media.bulkdelete', 'uses'=>'AdminMediaController@destroyMany']);
 
     Route::resource('admin/comments', 'PostCommentsController');
 
