@@ -42,7 +42,7 @@
       </li>
 
       <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link" href="{{ route('dashboard') }}" role="button">
+        <a class="nav-link" href="{{ route('home') }}" role="button">
             <i class="fas fa-fw fa-tachometer-alt"></i>
         </a>
       </li>

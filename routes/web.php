@@ -13,15 +13,9 @@
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', ['as'=>'home', 'uses'=>'HomeController@index'])->middleware('verified');
+Route::get('/', ['as'=>'home', 'uses'=>'HomeController@index']);
 
-/*
-*--------------------------------------------------------------------------
-*   Posts
-*--------------------------------------------------------------------------
-*/
-
-Route::get('/post/{id}', ['as'=>'post.show', 'uses'=>'PostsController@show']);
+Route::get('/post/{id}', ['as'=>'posts.show', 'uses'=>'PostsController@show']);
 
 Route::group(['middleware'=>'verified'], function(){
 
@@ -32,6 +26,7 @@ Route::group(['middleware'=>'verified'], function(){
     Route::resource('categories', 'CategoriesController');
 
     Route::resource('media', 'MediaController');
+    Route::post('media/bulk-delete', ['as'=>'media.destroyMany', 'uses'=>'MediaController@destroyMany']);
 
     Route::resource('comments', 'PostCommentsController');
 

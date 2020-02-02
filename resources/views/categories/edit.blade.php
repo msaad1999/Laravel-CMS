@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4 py-4 text-left">
-                {!! Form::model($category, ['method'=>'PATCH', 'action'=>['AdminCategoriesController@update', $category->id]]) !!}
+                {!! Form::model($category, ['method'=>'PATCH', 'action'=>['CategoriesController@update', $category->id]]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Name') !!}
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
@@ -31,7 +31,7 @@
                         {!! Form::close() !!}
                     </div>
                     <div class="col">
-                        {!! Form::open(['method'=>'DELETE', 'action'=>['AdminCategoriesController@destroy', $category->id]]) !!}
+                        {!! Form::open(['method'=>'DELETE', 'action'=>['CategoriesController@destroy', $category->id]]) !!}
                         {!! Form::submit('Delete Category', ['class'=>'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     </div>

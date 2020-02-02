@@ -9,7 +9,7 @@
     </div>
 
 
-    {!! Form::open(['method'=>'POST', 'action'=>'AdminMediaController@destroyMany']) !!}
+    {!! Form::open(['method'=>'POST', 'action'=>'MediaController@destroyMany']) !!}
 
     @component('layouts.components.datatable')
     @slot('title')

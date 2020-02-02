@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class Monitor
@@ -22,7 +23,6 @@ class Monitor
                 return $next($request);
             }
         }
-
         return redirect(404);
     }
 }

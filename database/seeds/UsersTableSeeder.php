@@ -14,10 +14,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'          => 'supahot',
-            'role_id'       => Role::whereName('administrator')->firstOrFail()->id,
-            'email'         => 'supahot@a.aa',
-            'password'      => 'aaaaaaaa',
+            'name'              => 'supahot',
+            'role_id'           => Role::whereName('administrator')->firstOrFail()->id,
+            'email'             => 'supahot@a.aa',
+            'email_verified_at' => now(),
+            'password'          => 'aaaaaaaa',
         ]);
     }
 }

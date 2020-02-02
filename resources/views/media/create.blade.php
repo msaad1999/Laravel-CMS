@@ -13,7 +13,7 @@
         <h1 class="h3 mb-0 text-gray-800">Upload Media</h1>
     </div>
 
-    {!! Form::open(['method'=>'POST', 'action'=>'AdminMediaController@store', 'class'=>'dropzone']) !!}
+    {!! Form::open(['method'=>'POST', 'action'=>'MediaController@store', 'class'=>'dropzone']) !!}
 
     {!! Form::close() !!}
 

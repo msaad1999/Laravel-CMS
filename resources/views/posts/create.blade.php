@@ -8,7 +8,7 @@
         <h1 class="h3 mb-0 text-gray-800">Create Post</h1>
     </div>
 
-    {!! Form::open(['method'=>'POST', 'action'=>'AdminPostsController@store', 'files'=>true]) !!}
+    {!! Form::open(['method'=>'POST', 'action'=>'PostsController@store', 'files'=>true]) !!}
 
         <div class="form-group">
             {!! Form::label('title', 'Title: ') !!}

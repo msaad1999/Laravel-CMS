@@ -18,7 +18,7 @@
         </div>
         <div class="col-sm-4"></div>
         <div class="col-sm-4 py-4 text-right">
-            {!! Form::open(['method'=>'POST', 'action'=>'AdminCategoriesController@store']) !!}
+            {!! Form::open(['method'=>'POST', 'action'=>'CategoriesController@store']) !!}
 
                 <div class="form-group">
                     {!! Form::label('name', 'Name') !!}

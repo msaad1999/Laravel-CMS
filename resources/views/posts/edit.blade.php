@@ -14,7 +14,7 @@
         </div>
 
         <div class="col-sm-9">
-            {!! Form::model($post, ['method'=>'PATCH', 'action'=>['AdminPostsController@update', $post->id], 'files'=>true]) !!}
+            {!! Form::model($post, ['method'=>'PATCH', 'action'=>['PostsController@update', $post->id], 'files'=>true]) !!}
 
             <div class="form-group">
                 {!! Form::label('title', 'Title: ') !!}
@@ -63,7 +63,7 @@
 
             {!! Form::close() !!}
 
-            {!! Form::model($post, ['method'=>'DELETE', 'action'=>['AdminPostsController@destroy', $post->id]]) !!}
+            {!! Form::model($post, ['method'=>'DELETE', 'action'=>['PostsController@destroy', $post->id]]) !!}
 
             <div class="form=group my-2">
                 {!! Form::submit('Delete Post', ['class'=>'btn btn-danger px-5']) !!}

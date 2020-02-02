@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('guest');
     }
 
     /**
@@ -24,33 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()){
-            if(Auth::user()->role){
-
-                switch (Auth::user()->role) {
-                    case 'administrator':
-                        return view('home.admin');
-                        break;
-                    case 'viewer':
-                        return view('home.viewer');
-                        break;
-                    case 'moderator':
-                        return view('home.moderator');
-                        break;
-                    case 'monitor':
-                        return view('home.monitor');
-                        break;
-                    default:
-                        return view('home.viewer');
-                        break;
-                }
-            }
-            else {
-                return view('home.viewer');
+        if (Auth::check()){
+            $user = Auth::user();
+            switch(true) {
+                case $user->isAdmin():
+                    return view('home.admin');
+                case $user->isModerator():
+                    return view('home.moderator');
+                case $user->isMonitor():
+                    return view('home.monitor');
+                default:
+                    return view('home.viewer');
             }
         }
         else {
             return view('welcome');
         }
+
     }
 }
