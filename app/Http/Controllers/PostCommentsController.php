@@ -17,8 +17,8 @@ class PostCommentsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('monitor')->only('view');
-        $this->middleware('moderator');
+        $this->middleware('monitor')->only('index', 'show');
+        $this->middleware('moderator')->except('index', 'show');
     }
 
     /**
@@ -32,7 +32,7 @@ class PostCommentsController extends Controller
 
         $comments = Comment::all();
 
-        return view('admin.comments.index', compact('comments'));
+        return view('comments.index', compact('comments'));
     }
 
     /**
@@ -71,7 +71,7 @@ class PostCommentsController extends Controller
     {
         //
         $post = Post::findOrFail($id);
-        return view('admin.comments.show', compact('post'));
+        return view('comments.show', compact('post'));
     }
 
     /**

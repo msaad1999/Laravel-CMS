@@ -11,7 +11,7 @@ use App\Post;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 
-class AdminCategoriesController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Instantiate a new controller instance.
@@ -20,8 +20,8 @@ class AdminCategoriesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('monitor')->only('view');
-        $this->middleware('moderator');
+        $this->middleware('monitor')->only('view', 'show');
+        $this->middleware('moderator')->except('view', 'show');
     }
 
     /**
@@ -35,7 +35,7 @@ class AdminCategoriesController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.categories.index', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -47,7 +47,7 @@ class AdminCategoriesController extends Controller
     {
         //
 
-        return view('admin.categories.create');
+        return view('categories.create');
     }
 
     /**
@@ -88,7 +88,7 @@ class AdminCategoriesController extends Controller
 
         $category = Category::findOrFail($id);
 
-        return view('admin.categories.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     /**

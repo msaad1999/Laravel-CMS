@@ -18,8 +18,8 @@ class CommentRepliesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('monitor')->only('view');
-        $this->middleware('moderator');
+        $this->middleware('monitor')->only('view', 'show');
+        $this->middleware('moderator')->except('view', 'show');
     }
 
     /**
@@ -72,7 +72,7 @@ class CommentRepliesController extends Controller
     public function show($id)
     {
         $comment = Comment::findOrFail($id);
-        return view('admin.comments.replies.show', compact('comment'));
+        return view('comments.replies.show', compact('comment'));
     }
 
     /**

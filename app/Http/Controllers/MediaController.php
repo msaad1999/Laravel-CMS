@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Photo;
 
-class AdminMediaController extends Controller
+class MediaController extends Controller
 {
     /**
      * Instantiate a new controller instance.
@@ -15,18 +15,18 @@ class AdminMediaController extends Controller
     public function __construct()
     {
         $this->middleware('monitor')->only('index');
-        $this->middleware('moderator')->except('view');
+        $this->middleware('moderator')->except('index');
     }
 
     public function index(){
 
         $photos = Photo::all();
-        return view('admin.media.index', compact('photos'));
+        return view('media.index', compact('photos'));
     }
 
     public function create(){
 
-        return view('admin.media.create');
+        return view('media.create');
     }
 
     public function store(Request $request){

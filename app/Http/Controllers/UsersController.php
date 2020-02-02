@@ -11,7 +11,7 @@ use App\http\Requests\UsersEditRequest;
 use Illuminate\Support\Facades\Session;
 
 
-class AdminUsersController extends Controller
+class UsersController extends Controller
 {
 
     /**
@@ -34,7 +34,7 @@ class AdminUsersController extends Controller
     {
         $users = User::all();
 
-        return view('admin.users.index', compact('users'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -46,7 +46,7 @@ class AdminUsersController extends Controller
     {
         $roles = Role::pluck('name', 'id')->all();
 
-        return view('admin.users.create', compact('roles'));
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -107,7 +107,7 @@ class AdminUsersController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::pluck('name', 'id')->all();
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**

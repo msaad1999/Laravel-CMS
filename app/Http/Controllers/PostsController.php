@@ -15,7 +15,7 @@ use \DOMDocument;
 
 
 
-class AdminPostsController extends Controller
+class PostsController extends Controller
 {
     /**
      * Instantiate a new controller instance.
@@ -39,7 +39,7 @@ class AdminPostsController extends Controller
 
         $posts = Post::all();
 
-        return view('admin.posts.index', compact('posts'));
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -53,7 +53,7 @@ class AdminPostsController extends Controller
 
         $categories = Category::pluck('name', 'id')->all();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('posts.create', compact('categories'));
     }
 
     /**
@@ -132,7 +132,7 @@ class AdminPostsController extends Controller
     {
         $post =  Post::whereSlug($slug)->firstOrFail();
 
-        return view('post', compact('post'));
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -148,7 +148,7 @@ class AdminPostsController extends Controller
         $post = Post::findOrFail($id);
         $categories = Category::pluck('name', 'id')->all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     /**

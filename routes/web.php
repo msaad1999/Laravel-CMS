@@ -21,36 +21,21 @@ Route::get('/', ['as'=>'home', 'uses'=>'HomeController@index'])->middleware('ver
 *--------------------------------------------------------------------------
 */
 
-Route::get('/post/{id}', ['as'=>'post.show', 'uses'=>'AdminPostsController@show']);
-Route::get('/posts/', ['as'=>'post.index', 'uses'=>'AdminPostsController@index']);
-Route::get('/posts/{id}', ['as'=>'post.edit', 'uses'=>'AdminPostsController@edit']);
-Route::get('/posts/{id}', ['as'=>'post.create', 'uses'=>'AdminPostsController@create']);
-Route::patch('/posts/{id}', ['as'=>'post.create', 'uses'=>'AdminPostsController@create']);
+Route::get('/post/{id}', ['as'=>'post.show', 'uses'=>'PostsController@show']);
 
-Route::resource('/posts', 'AdminPostsController');
+Route::group(['middleware'=>'verified'], function(){
 
-Route::group(['middleware'=>'admin'], function(){
+    Route::resource('posts', 'PostsController', ['except' => ['show']]);
 
-    Route::get('/admin', function(){
+    Route::resource('users', 'UsersController');
 
-        return view('layouts.admin');
-    })->name('dashboard');
+    Route::resource('categories', 'CategoriesController');
 
-    Route::resource('admin/users', 'AdminUsersController');
+    Route::resource('media', 'MediaController');
 
+    Route::resource('comments', 'PostCommentsController');
 
-
-    Route::resource('admin/categories', 'AdminCategoriesController');
-
-    Route::resource('admin/media', 'AdminMediaController');
-    Route::post('admin/media-bulkdelete', ['as'=>'media.bulkdelete', 'uses'=>'AdminMediaController@destroyMany']);
-
-    Route::resource('admin/comments', 'PostCommentsController');
-
-    Route::resource('admin/comment/replies', 'CommentRepliesController');
-});
-
-Route::group(['middleware'=>'auth'], function(){
+    Route::resource('comment/replies', 'CommentRepliesController');
 
     Route::post('comment/reply', 'CommentRepliesController@createReply');
 });

@@ -43,7 +43,7 @@
                 </td>
                 <td>{{ $reply->body }}</td>
                 <td>
-                    <a href="{{ route('home.post', $reply->comment->post->slug) }}">
+                    <a href="{{ route('posts.show', $reply->comment->post->slug) }}">
                         View Post
                     </a>
                 </td>

@@ -47,7 +47,7 @@
                 </td>
                 <td>{{ $comment->body }}</td>
                 <td>
-                    <a href="{{ route('home.post', $comment->post->slug) }}">
+                    <a href="{{ route('posts.show', $comment->post->slug) }}">
                         View Post
                     </a>
                 </td>
