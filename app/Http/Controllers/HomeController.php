@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use App\Role;
 use App\Category;
 use App\Comment;
 use App\CommentReply;
@@ -36,10 +37,19 @@ class HomeController extends Controller
 
                     $users = User::all();
                     $posts = Post::all();
+                    $roles = Role::all();
                     $categories = Category::all();
                     $comments = Comment::all();
                     $replies = CommentReply::all();
-                    return view('home.admin', compact('users', 'posts', 'categories', 'comments', 'replies'));
+
+                    for($i=0; $i < 12; $i++){
+
+                        $userMonthCount[$i+1] = User::whereMonth('created_at', $i+1)->count();
+                    }
+                    return view('home.admin', compact(
+                        'users', 'userMonthCount', 'posts', 'roles',
+                        'categories', 'comments', 'replies'
+                    ));
                     break;
                 case $user->isModerator():
 
