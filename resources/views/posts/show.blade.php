@@ -154,40 +154,29 @@
         </div>
       </div>
 
-      <!-- Categories Widget -->
-      <div class="card my-4">
-        <h5 class="card-header">Categories</h5>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#">Web Design</a>
-                </li>
-                <li>
-                  <a href="#">HTML</a>
-                </li>
-                <li>
-                  <a href="#">Freebies</a>
-                </li>
-              </ul>
+        <!-- Categories Widget -->
+        <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                        @for($i=0; $i < sizeOf($categories); $i++)
+                            <li>
+                                <a href="{{ route('categories.edit', $categories[$i]->id) }}">{{ $categories[$i]->name }}</a>
+                            </li>
+                            @if(($i + 1) % 3 == 0)
+                                </ul><ul class="list-unstyled mb-0"></div>
+                                    <div class="col-lg-6"><ul class="list-unstyled mb-0">
+                            @endif
+                        </ul><ul class="list-unstyled mb-0">
+                        @endfor
+
+                    </ul>
+                </div>
             </div>
-            <div class="col-lg-6">
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#">JavaScript</a>
-                </li>
-                <li>
-                  <a href="#">CSS</a>
-                </li>
-                <li>
-                  <a href="#">Tutorials</a>
-                </li>
-              </ul>
             </div>
-          </div>
         </div>
-      </div>
 
       <!-- Side Widget -->
       <div class="card my-4">

@@ -131,14 +131,15 @@ class PostsController extends Controller
     public function show($slug)
     {
         $post =  Post::whereSlug($slug)->firstOrFail();
-
-        return view('posts.show', compact('post'));
+        $categories = Category::all();
+        return view('posts.show', compact('post', 'categories'));
     }
 
     public function blogHome(){
 
         $posts = Post::paginate(3);
-        return view('posts.blog-home', compact('posts'));
+        $categories = Category::all();
+        return view('posts.blog-home', compact('posts', 'categories'));
     }
 
     /**
