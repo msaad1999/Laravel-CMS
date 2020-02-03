@@ -13,7 +13,12 @@
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', ['as'=>'home', 'uses'=>'HomeController@index']);
+Route::get('/', function(){
+
+    return view('welcome');
+})->name('home');
+
+Route::get('/dashboard', ['as'=>'dashboard', 'uses'=>'HomeController@index']);
 
 Route::get('/post/{id}', ['as'=>'posts.show', 'uses'=>'PostsController@show']);
 
