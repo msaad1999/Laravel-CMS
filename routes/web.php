@@ -21,6 +21,7 @@ Route::get('/', function(){
 Route::get('/dashboard', ['as'=>'dashboard', 'uses'=>'HomeController@index']);
 
 Route::get('/post/{id}', ['as'=>'posts.show', 'uses'=>'PostsController@show']);
+Route::get('/blog-home', ['as'=>'posts.blog-home', 'uses'=>'PostsController@blogHome']);
 
 Route::group(['middleware'=>'verified'], function(){
 

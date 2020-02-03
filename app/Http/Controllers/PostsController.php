@@ -135,6 +135,12 @@ class PostsController extends Controller
         return view('posts.show', compact('post'));
     }
 
+    public function blogHome(){
+
+        $posts = Post::paginate(3);
+        return view('posts.blog-home', compact('posts'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

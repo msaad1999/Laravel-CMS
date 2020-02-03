@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $output = new Symfony\Component\Console\Output\ConsoleOutput();
+
         Schema::disableForeignKeyConstraints();
+
 
         /*
         *   Seeds
@@ -26,14 +30,19 @@ class DatabaseSeeder extends Seeder
         /*
         *   Factories
         */
+        $output->writeln("<comment>Running Factories</comment>");
+        $factoryTime = Carbon::now();
 
-        factory(App\User::class, 10)->create()->each(function($user){
+        factory(App\User::class, 20)->create()->each(function($user){
             $user->posts()->save(factory(App\Post::class)->make());
         });
 
-        factory(App\Comment::class,10)->create()->each(function($comment){
+        factory(App\Comment::class,20)->create()->each(function($comment){
             $comment->replies()->save(factory(App\CommentReply::class)->make());
         });
+
+        $diff = Carbon::now()->diffInSeconds($factoryTime);
+        $output->writeln("<info>Factory Production Complete</info> ($diff seconds)\n");
 
 
         Schema::enableForeignKeyConstraints();

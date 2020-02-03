@@ -10,7 +10,7 @@
 
     <div class="row">
         @include('layouts.components.card', [
-            'textclass' => 'success',
+            'textclass' => 'primary',
             'title' => 'Users',
             'faIcon' => '<i class="fas fa-users fa-2x text-gray-300"></i>',
             'data' => $users->count(),
@@ -22,13 +22,13 @@
             'data' => $posts->count(),
         ])
         @include('layouts.components.card', [
-            'textclass' => 'success',
+            'textclass' => 'warning',
             'title' => 'Categories',
             'faIcon' => '<i class="fas fa-file-alt fa-2x text-gray-300"></i>',
             'data' => $categories->count(),
         ])
         @include('layouts.components.card', [
-            'textclass' => 'success',
+            'textclass' => 'info',
             'title' => 'Comments',
             'faIcon' => '<i class="fas fa-bullhorn fa-2x text-gray-300"></i>',
             'data' => $comments->count() + $replies->count(),
@@ -61,7 +61,7 @@
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
         label: "Registrations",
-        lineTension: 0.3,
+        lineTension: 0,
         backgroundColor: "rgba(78, 115, 223, 0.05)",
         borderColor: "rgba(78, 115, 223, 1)",
         pointRadius: 3,

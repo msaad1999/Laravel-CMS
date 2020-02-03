@@ -31,6 +31,4 @@ mix.js('resources/js/app.js', 'public/js')
     .scripts('resources/assets/theme_sb-admin-2/js/demo/chart-area-demo.js', 'public/js/components/chart-area.js')
     .scripts('resources/assets/theme_sb-admin-2/js/demo/chart-pie-demo.js', 'public/js/components/chart-pie.js')
     .scripts('resources/assets/theme_sb-admin-2/js/demo/chart-bar-demo.js', 'public/js/components/chart-bar.js')
-    .scripts('resources/assets/theme_sb-admin-2/js/demo/datatables-demo.js', 'public/js/components/datatables.js')
-    .styles('resources/assets/summernote/css/summernote.min.css', 'public/css/components/summernote.min.css')
-    .scripts('resources/assets/summernote/js/summernote.min.js', 'public/js/components/summernote.min.js');
+    .scripts('resources/assets/theme_sb-admin-2/js/demo/datatables-demo.js', 'public/js/components/datatables.js');

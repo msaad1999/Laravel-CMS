@@ -17,12 +17,18 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+
+    $created_at = $faker->dateTimeBetween('this year', '+12 months');
+    $updated_at = $faker->dateTimeBetween($created_at, '+12 months');
+
     return [
         'name' => $faker->unique()->name,
-        'role_id' => $faker->numberBetween(1,4),
+        'role_id' => $faker->numberBetween(2,4),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => 'password',
         'remember_token' => Str::random(10),
+        'created_at' => $created_at,
+        'updated_at' => $updated_at,
     ];
 });
